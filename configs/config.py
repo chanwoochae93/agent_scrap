@@ -18,7 +18,7 @@ CONFIG = {
         "sender_email": os.getenv("MAIN_AGENT_EMAIL"),
         "sender_password": os.getenv("MAIN_AGENT_PASSWORD"),
         "receiver_email": os.getenv("RECEIVER_EMAIL"),
-        "subject_template": "🚀 주간 FE 트렌드 리포트: 새로운 CSS 속성 & HTML 태그 분석 - {date}"
+        "subject_template": "🚀 주간 웹 퍼블리싱 리포트: 새로운 CSS 속성 & HTML 태그 분석 - {date}"
     },
     
     # 스케줄 설정 (한국 시간 월요일 오전 10시)
@@ -40,9 +40,15 @@ CONFIG = {
         "https://www.joshwcomeau.com/rss.xml/",
 
         # 주요 기술 블로그
-        "https://openai.com/blog/rss.xml",
         "https://vercel.com/blog/rss.xml",
         "https://dev.to/feed",
+        
+        # --- AI 관련 블로그 추가 ---
+        "https://openai.com/blog/rss.xml",
+        "https://blogs.nvidia.com/feed/",
+        "https://aws.amazon.com/blogs/machine-learning/feed/",
+        "https://ai.google/research/blog/rss/",
+        "https://huggingface.co/blog/feed.xml"
     ],
     
     # Reddit 설정
@@ -52,8 +58,12 @@ CONFIG = {
         "client_secret": os.getenv("REDDIT_CLIENT_SECRET"),
         "user_agent": "WebDevTrendsAgent/2.0",
         "subreddits": [
+            # 웹개발
             "webdev", "css", "html5", "Frontend", "javascript",
-            "reactjs", "vuejs"
+            "reactjs", "vuejs",
+            # --- AI 관련 서브레딧 추가 ---
+            "artificial", "singularity", "LocalLLaMA", "MachineLearning",
+            "webdev_ai" # 웹개발 + AI 혼합
         ],
         "post_limit": 15,
         "time_filter": "week"
@@ -106,15 +116,6 @@ CONFIG = {
     "AI_CONFIG": {
         "enabled": True,
         
-        # Gemini (1순위)
-        "gemini": {
-            "enabled": True,
-            "api_key": os.getenv("MAIN_AGENT_GEMINI_KEY"),
-            "model": "gemini-2.5-flash",
-            "daily_limit": 1500,
-            "features": ["summarize", "analyze", "translate", "predict"]
-        },
-        
         # Claude (2순위)
         "claude": {
             "enabled": bool(os.getenv("ANTHROPIC_API_KEY")),
@@ -156,16 +157,51 @@ CONFIG = {
     # 콘텐츠 필터링 키워드
     "FILTER_KEYWORDS": {
         "must_have_any": [
-            "html", "html5", "new tag", "semantic",
-            "css", "css3", "css trick", "new property", "selector",
-            ":has()", "container query", "cascade layers", "subgrid",
-            "logical properties", "color space", "lch", "oklch",
-            "animation", "transition", "flexbox", "grid",
-            "web accessibility", "a11y", "web performance", "core web vitals",
-            "frontend", "ui", "ux", "web design",
-            "view transitions", "css nesting", "htmx",
+            # --- AI 및 AI 기반 개발 도구 키워드 추가 ---
+            "ai",
+            # 기존 웹/프론트엔드 키워드
+            "html",
+            "a11y",
+            "ai agent",
+            "ai tool",
+            "artificial intelligence",
+            "claude 3",
+            "code generation",
+            "core web vitals",
+            "css",
+            "css base units",
+            "css-in-js",
+            "cursor ide",
+            "design system automation",
+            "devin",
+            "fine-tuning",
+            "frontend",
+            "gemini",
+            "generative ui",
+            "github copilot",
+            "gpt-4",
+            "gpt-5",
+            "intl api",
+            "javascript",
+            "langchain",
+            "llama",
+            "llm",
+            "next.js",
+            "prompt engineering",
+            "rag",
+            "react",
+            "scroll-driven css animations",
+            "sora",
+            "svelte",
+            "tailwind",
+            "transformer",
+            "typescript",
+            "v0.dev",
+            "vue",
+            "web accessibility",
+            "web performance"
         ],
-        "exclude": ["spam", "advertisement", "promoted", "sponsored", "job", "hiring"]
+        "exclude": ["spam", "advertisement", "promoted", "sponsored", "job", "hiring", "crypto", "blockchain"]
     },
     
     # 리포트 설정
