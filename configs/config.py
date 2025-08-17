@@ -18,7 +18,7 @@ CONFIG = {
         "sender_email": os.getenv("MAIN_AGENT_EMAIL"),
         "sender_password": os.getenv("MAIN_AGENT_PASSWORD"),
         "receiver_email": os.getenv("RECEIVER_EMAIL"),
-        "subject_template": "🚀 주간 웹개발 & AI 트렌드 리포트 - {date}"
+        "subject_template": "🚀 주간 FE 트렌드 리포트: 새로운 CSS 속성 & HTML 태그 분석 - {date}"
     },
     
     # 스케줄 설정 (한국 시간 월요일 오전 10시)
@@ -31,17 +31,18 @@ CONFIG = {
     
     # RSS 피드
     "RSS_FEEDS": [
-        # CSS & HTML
+        # CSS & HTML 전문
         "https://css-tricks.com/feed/",
         "https://www.smashingmagazine.com/feed/",
         "https://developer.mozilla.org/en-US/blog/rss.xml",
-        
-        # AI & 웹개발
-        "https://openai.com/blog/rss.xml",
-        "https://www.anthropic.com/rss.xml",
         "https://web.dev/feed.xml",
+        "https://ishadeed.com/feed.xml",
+        "https://www.joshwcomeau.com/rss.xml/",
+
+        # 주요 기술 블로그
+        "https://openai.com/blog/rss.xml",
+        "https://vercel.com/blog/rss.xml",
         "https://dev.to/feed",
-        "https://hackernoon.com/feed",
     ],
     
     # Reddit 설정
@@ -49,14 +50,12 @@ CONFIG = {
         "enabled": True,
         "client_id": os.getenv("REDDIT_CLIENT_ID"),
         "client_secret": os.getenv("REDDIT_CLIENT_SECRET"),
-        "user_agent": "WebDevTrendsAgent/1.0",
+        "user_agent": "WebDevTrendsAgent/2.0",
         "subreddits": [
-            "webdev", "css", "html5", "Frontend",
-            "web accessibility", "web performance", "html", "scss",
-            "web development", "web design", "css-tricks", "css-frameworks",
-            "css animation", "iOS issue", "iOS mobile issue"
+            "webdev", "css", "html5", "Frontend", "javascript",
+            "reactjs", "vuejs"
         ],
-        "post_limit": 10,
+        "post_limit": 15,
         "time_filter": "week"
     },
     
@@ -146,23 +145,27 @@ CONFIG = {
             "save_stats": True
         }
     },
+
+    "API_KEYS": {
+        "collector": os.getenv("COLLECTOR_AGENT_GEMINI_KEY"),
+        "analyzer": os.getenv("ANALYZER_AGENT_GEMINI_KEY"),
+        "emailer": os.getenv("EMAILER_AGENT_GEMINI_KEY"),
+        "code_reviewer": os.getenv("CODE_REVIEWER_AGENT_GEMINI_KEY"),
+    },
     
     # 콘텐츠 필터링 키워드
     "FILTER_KEYWORDS": {
         "must_have_any": [
-            # AI 관련
-            "AI", "LLM",
-            
-            # 웹개발 관련
-            "webdev", "css", "html5", "Frontend",
-            "web accessibility", "web performance", "html", "scss",
-            "web development", "web design", "css-tricks", "css-frameworks",
-            "css animation", "iOS issue", "iOS mobile issue"
-            
-            # 트렌드
-            "trend"
+            "html", "html5", "new tag", "semantic",
+            "css", "css3", "css trick", "new property", "selector",
+            ":has()", "container query", "cascade layers", "subgrid",
+            "logical properties", "color space", "lch", "oklch",
+            "animation", "transition", "flexbox", "grid",
+            "web accessibility", "a11y", "web performance", "core web vitals",
+            "frontend", "ui", "ux", "web design",
+            "view transitions", "css nesting", "htmx",
         ],
-        "exclude": ["spam", "advertisement", "promoted", "sponsored"]
+        "exclude": ["spam", "advertisement", "promoted", "sponsored", "job", "hiring"]
     },
     
     # 리포트 설정
